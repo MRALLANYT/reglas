@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REGLAS — Memory Cards Vallenato</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --sol:    #F5A623;   /* oro vallenato */
+  --fuego:  #D94F04;   /* naranja festival */
+  --tierra: #7B3F00;   /* café acordeón */
+  --cielo:  #1B6CA8;   /* azul Sierra */
+  --verde:  #2E7D32;   /* verde palma */
+  --cream:  #FFF8E7;   /* papel viejo */
+  --blanco: #FFFDF5;
+  --oscuro: #1C0A00;
+  --bg:     #1C0A00;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  font-family: 'Oswald', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ── FONDO PATRÓN VALLENATO ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(245,166,35,0.04) 0px,
+      rgba(245,166,35,0.04) 1px,
+      transparent 1px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(217,79,4,0.04) 0px,
+      rgba(217,79,4,0.04) 1px,
+      transparent 1px,
+      transparent 40px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── DEGRADADO AMBIENTAL ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(245,166,35,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 0% 100%, rgba(27,108,168,0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 100% 60%, rgba(217,79,4,0.12) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* ══════════════════════════════
+   CABECERA FESTIVAL
+══════════════════════════════ */
+.festival-header {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+/* Cinta superior */
+.ribbon-top {
+  background: linear-gradient(90deg, var(--fuego), var(--sol), var(--fuego));
+  height: 8px;
+  border-radius: 0 0 4px 4px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(217,79,4,0.6);
+  animation: ribbon-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes ribbon-shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; box-shadow: 0 4px 30px rgba(245,166,35,0.8); }
+}
+
+/* Marco de la imagen */
+.img-marco {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.img-marco::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid var(--sol);
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(245,166,35,0.3), inset 0 0 15px rgba(0,0,0,0.2);
+  animation: marco-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes marco-glow {
+  0% { box-shadow: 0 0 20px rgba(245,166,35,0.4); }
+  100% { box-shadow: 0 0 35px rgba(245,166,35,0.8), 0 0 60px rgba(217,79,4,0.3); }
+}
+
+.img-marco img {
+  width: 300px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+
+/* ── Letras estilo festival ── */
+.festival-eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  color: var(--sol);
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+  text-shadow: 0 0 20px rgba(245,166,35,0.5);
+  animation: fadeDown 1s ease-out both;
+}
+
+.festival-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: clamp(48px, 10vw, 88px);
+  line-height: 0.9;
+  color: var(--cream);
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  animation: titlePop 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+.festival-title .word-memory {
+  display: block;
+  color: var(--sol);
+  text-shadow:
+    0 0 10px rgba(245,166,35,0.6),
+    0 0 30px rgba(245,166,35,0.3),
+    3px 3px 0 var(--tierra);
+}
+
+.festival-title .word-cards {
+  display: block;
+  color: var(--cream);
+  text-shadow: 3px 3px 0 var(--fuego), 6px 6px 0 rgba(217,79,4,0.3);
+}
+
+.festival-subtitle {
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: rgba(255,248,231,0.6);
+  letter-spacing: 2px;
+  margin-top: 10px;
+  animation: fadeUp 1s ease-out 0.5s both;
+}
+
+/* Separador de notas musicales */
+.nota-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  margin: 24px 0;
+  animation: fadeUp 1s ease-out 0.7s both;
+}
+
+.nota-divider span {
+  font-size: 22px;
+  animation: nota-dance 2s ease-in-out infinite;
+}
+.nota-divider span:nth-child(1) { animation-delay: 0s; }
+.nota-divider span:nth-child(2) { animation-delay: 0.3s; }
+.nota-divider span:nth-child(3) { animation-delay: 0.6s; color: var(--fuego); font-size: 28px; }
+.nota-divider span:nth-child(4) { animation-delay: 0.3s; }
+.nota-divider span:nth-child(5) { animation-delay: 0s; }
+
+@keyframes nota-dance {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-6px) rotate(5deg); }
+}
+
+.nota-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--sol), transparent);
+  max-width: 120px;
+}
+
+/* ══════════════════════════════
+   CHIPS INFO
+══════════════════════════════ */
+.info-band {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 50px;
+  animation: fadeUp 0.8s ease-out 0.9s both;
+}
+
+.info-chip {
+  background: linear-gradient(135deg, rgba(245,166,35,0.12) 0%, rgba(27,108,168,0.08) 100%);
+  border: 1px solid rgba(245,166,35,0.3);
+  border-radius: 8px;
+  padding: 16px 12px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-chip:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(245,166,35,0.2);
+}
+
+.info-chip::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--fuego), var(--sol));
+}
+
+.chip-icon { font-size: 24px; margin-bottom: 6px; display: block; }
+.chip-label {
+  font-family: 'Caveat', cursive;
+  font-size: 14px;
+  color: rgba(255,248,231,0.5);
+  display: block;
+  margin-bottom: 4px;
+}
+.chip-val {
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--sol);
+  text-shadow: 0 0 12px rgba(245,166,35,0.4);
+}
+
+/* ══════════════════════════════
+   SECCIONES
+══════════════════════════════ */
+.seccion {
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 0.7s ease-out forwards;
+}
+.seccion:nth-child(1) { animation-delay: 1.1s; }
+.seccion:nth-child(2) { animation-delay: 1.3s; }
+.seccion:nth-child(3) { animation-delay: 1.5s; }
+.seccion:nth-child(4) { animation-delay: 1.7s; }
+.seccion:nth-child(5) { animation-delay: 1.9s; }
+.seccion:nth-child(6) { animation-delay: 2.1s; }
+
+.sec-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.sec-num {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  background: var(--fuego);
+  color: var(--cream);
+  padding: 6px 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 15px rgba(217,79,4,0.4), 3px 3px 0 rgba(0,0,0,0.3);
+  flex-shrink: 0;
+}
+
+.sec-titulo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(245,166,35,0.25);
+  flex: 1;
+  padding-bottom: 6px;
+}
+
+/* Tarjeta base */
+.tarjeta {
+  background: linear-gradient(135deg, rgba(255,248,231,0.04) 0%, rgba(27,108,168,0.04) 100%);
+  border: 1px solid rgba(245,166,35,0.18);
+  border-radius: 10px;
+  padding: 24px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tarjeta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: linear-gradient(to bottom, var(--sol), var(--fuego));
+  border-radius: 10px 0 0 10px;
+}
+
+/* ── Regla item ── */
+.regla-lista { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+
+.regla-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  line-height: 1.6;
+  transition: transform 0.2s ease;
+}
+
+.regla-item:hover { transform: translateX(5px); }
+
+.regla-icono {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, var(--sol), var(--fuego));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(245,166,35,0.3);
+  margin-top: 2px;
+}
+
+.regla-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(255,248,231,0.85);
+  line-height: 1.65;
+}
+
+.regla-text strong {
+  color: var(--sol);
+  font-weight: 600;
+}
+
+/* ── Pasos ── */
+.pasos { display: flex; flex-direction: column; gap: 12px; }
+
+.paso {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(245,166,35,0.1);
+  border-radius: 8px;
+  padding: 14px 18px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.paso:hover {
+  background: rgba(245,166,35,0.07);
+  border-color: rgba(245,166,35,0.3);
+}
+
+.paso-num {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  background: var(--cielo);
+  color: var(--cream);
+  width: 30px; height: 30px;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(27,108,168,0.4);
+}
+
+.paso-contenido { flex: 1; }
+
+.paso-titulo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--sol);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.paso-desc {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 14px;
+  color: rgba(255,248,231,0.65);
+  line-height: 1.6;
+}
+
+/* ── Instrumentos / Símbolos del juego ── */
+.simbolos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.simbolo-card {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(245,166,35,0.15);
+  border-radius: 8px;
+  padding: 18px 16px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.simbolo-card:hover {
+  transform: translateY(-5px) rotate(1deg);
+  box-shadow: 0 12px 30px rgba(245,166,35,0.15);
+  border-color: rgba(245,166,35,0.4);
+}
+
+.simbolo-emoji { font-size: 38px; display: block; margin-bottom: 10px; }
+
+.simbolo-nombre {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.simbolo-desc {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: rgba(255,248,231,0.5);
+  line-height: 1.5;
+}
+
+/* ── TIP / NOTA CULTURAL ── */
+.nota-cultural {
+  background: linear-gradient(135deg, rgba(46,125,50,0.15) 0%, rgba(27,108,168,0.1) 100%);
+  border: 1px solid rgba(46,125,50,0.3);
+  border-left: 4px solid var(--verde);
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.nota-icono {
+  font-size: 24px;
+  flex-shrink: 0;
+  animation: nota-dance 2s ease-in-out infinite;
+}
+
+.nota-body { flex: 1; }
+
+.nota-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--verde);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+  text-shadow: 0 0 8px rgba(46,125,50,0.6);
+}
+
+.nota-txt {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 14px;
+  color: rgba(255,248,231,0.75);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* ── Ganar / Puntuación ── */
+.puntaje-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.puntaje-card {
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.puntaje-card.oro {
+  background: linear-gradient(135deg, rgba(245,166,35,0.2), rgba(217,79,4,0.1));
+  border: 1px solid rgba(245,166,35,0.4);
+}
+.puntaje-card.plata {
+  background: linear-gradient(135deg, rgba(180,180,200,0.1), rgba(100,100,130,0.05));
+  border: 1px solid rgba(180,180,200,0.2);
+}
+.puntaje-card.bronce {
+  background: linear-gradient(135deg, rgba(123,63,0,0.3), rgba(90,40,0,0.1));
+  border: 1px solid rgba(123,63,0,0.4);
+}
+
+.puntaje-posicion {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  display: block;
+}
+.oro .puntaje-posicion { color: var(--sol); text-shadow: 0 0 8px rgba(245,166,35,0.5); }
+.plata .puntaje-posicion { color: #B0BEC5; }
+.bronce .puntaje-posicion { color: #A1562B; }
+
+.puntaje-trofeo { font-size: 32px; display: block; margin-bottom: 8px; }
+
+.puntaje-regla {
+  font-family: 'Oswald', sans-serif;
+  font-size: 15px;
+  color: rgba(255,248,231,0.8);
+  line-height: 1.5;
+}
+
+/* ── Penalizaciones ── */
+.penalizacion-list {
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.pen-item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: rgba(217,79,4,0.08);
+  border: 1px solid rgba(217,79,4,0.2);
+  border-radius: 6px;
+  padding: 12px 16px;
+}
+
+.pen-icon { font-size: 20px; flex-shrink: 0; }
+
+.pen-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  color: rgba(255,248,231,0.8);
+}
+
+.pen-text strong { color: #FF7043; }
+
+/* ── Divider ── */
+.divisor {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 40px 0;
+}
+
+.divisor-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(245,166,35,0.3), transparent);
+}
+
+.divisor-sym {
+  font-size: 18px;
+  animation: nota-dance 2.5s ease-in-out infinite;
+}
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer {
+  text-align: center;
+  padding-top: 40px;
+  border-top: 1px solid rgba(245,166,35,0.15);
+  animation: fadeUp 1s ease-out 2.5s both;
+}
+
+.footer-notas {
+  font-size: 24px;
+  display: block;
+  margin-bottom: 12px;
+  letter-spacing: 10px;
+  opacity: 0.6;
+}
+
+.footer-logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--sol);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.footer-copy {
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(255,248,231,0.3);
+}
+
+/* ══════════════════════════════
+   ANIMACIONES
+══════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes titlePop {
+  0%   { opacity: 0; transform: scale(0.7) rotate(-3deg); }
+  60%  { opacity: 1; transform: scale(1.05) rotate(1deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 600px) {
+  .info-band { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .chip-val { font-size: 22px; }
+  .tarjeta { padding: 18px 16px; }
+  .simbolos-grid { grid-template-columns: repeat(2, 1fr); }
+  .festival-title { font-size: clamp(40px, 14vw, 72px); }
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- ══ CABECERA ══ -->
+  <header class="festival-header">
+    <div class="ribbon-top"></div>
+
+    <div class="img-marco">
+      <img src="img/acordeon.jpg" alt="Acordeón Vallenato">
+    </div>
+
+    <p class="festival-eyebrow"></p>
+
+    <h1 class="festival-title">
+      <span class="word-memory">Memory</span>
+      <span class="word-cards">Cards</span>
+    </h1>
+
+    <p class="festival-subtitle">Juego de cartas de memoria.</p>
+
+    <div class="nota-divider">
+      <div class="nota-line"></div>
+      <span>♩</span>
+      <span>♪</span>
+      <span>🪗</span>
+      <span>♫</span>
+      <span>♬</span>
+      <div class="nota-line"></div>
+    </div>
+  </header>
+
+  <!-- ══ CHIPS INFO ══ -->
+  <div class="info-band">
+    <div class="info-chip">
+      <span class="chip-icon">👥</span>
+      <span class="chip-label">Jugadores</span>
+      <span class="chip-val">2 – 6</span>
+    </div>
+    <div class="info-chip">
+      <span class="chip-icon">🎂</span>
+      <span class="chip-label">Edad</span>
+      <span class="chip-val">6 +</span>
+    </div>
+    <div class="info-chip">
+      <span class="chip-icon">🃏</span>
+      <span class="chip-label">Cartas</span>
+      <span class="chip-val">18</span>
+    </div>
+  </div>
+
+  <!-- ══ 01 OBJETIVO ══ -->
+  <div class="seccion">
+    <div class="sec-header">
+      <span class="sec-num">01</span>
+      <h2 class="sec-titulo">Objetivo del Juego</h2>
+    </div>
+    <div class="tarjeta">
+      <ul class="regla-lista">
+        <li class="regla-item">
+          <span class="regla-icono">🎯</span>
+          <span class="regla-text">
+            <strong>Encuentra todos los pares.</strong> El objetivo es voltear dos cartas iguales — el mismo dibujo del folclor vallenato — y quedarte con ellas.
+          </span>
+        </li>
+        <li class="regla-item">
+          <span class="regla-icono">🏆</span>
+          <span class="regla-text">
+            <strong>Gana quien más pares junte.</strong> Al descubrir el último par, el jugador con más parejas en su pila es el campeón de la ronda.
+          </span>
+        </li>
+        <li class="regla-item">
+          <span class="regla-icono">🧠</span>
+          <span class="regla-text">
+            <strong>Memoria y concentración.</strong> Recuerda dónde está cada imagen para adelantarte a los demás jugadores y completar más pares.
+          </span>
+        </li>
+        <li class="regla-item">
+          <span class="regla-icono">🎶</span>
+          <span class="regla-text">
+            <strong>¡Aprende la cultura!</strong> Cada carta muestra un elemento del Festival Vallenato: personajes y Ubicaciones de valledupar.
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══ 02 PREPARACIÓN ══ -->
+  <div class="seccion">
+    <div class="sec-header">
+      <span class="sec-num">02</span>
+      <h2 class="sec-titulo">Preparación</h2>
+    </div>
+    <div class="pasos">
+      <div class="paso">
+        <span class="paso-num">1</span>
+        <div class="paso-contenido">
+          <p class="paso-titulo">Mezcla las cartas</p>
+          <p class="paso-desc">Baraja bien las 18 cartas y colócalas boca abajo sobre la mesa en filas ordenadas. Pueden ser 3 filas de 6 o 4 filas de 4-5 cartas.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="paso-num">2</span>
+        <div class="paso-contenido">
+          <p class="paso-titulo">Decide quién empieza</p>
+          <p class="paso-desc">El jugador más joven comienza. Si prefieren, pueden sortear con papel-tijera-piedra. El turno sigue en sentido de las manecillas del reloj.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="paso-num">3</span>
+        <div class="paso-contenido">
+          <p class="paso-titulo">Asigna un espacio a cada quien</p>
+          <p class="paso-desc">Cada jugador debe tener espacio a su lado para apilar las parejas que vaya ganando durante la partida.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 03 CÓMO JUGAR ══ -->
+  <div class="seccion">
+    <div class="sec-header">
+      <span class="sec-num">03</span>
+      <h2 class="sec-titulo">Cómo Jugar</h2>
+    </div>
+    <div class="pasos">
+      <div class="paso">
+        <span class="paso-num">1</span>
+        <div class="paso-contenido">
+          <p class="paso-titulo">Voltea la primera carta</p>
+          <p class="paso-desc">En tu turno, elige cualquier carta boca abajo y voltéala para que todos puedan verla.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="paso-num">2</span>
+        <div class="paso-contenido">
+          <p class="paso-titulo">Voltea la segunda carta</p>
+          <p class="paso-desc">Elige una segunda carta diferente e intenta encontrar la igual a la primera. ¡Todos miran y recuerdan!</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="paso-num">3</span>
+        <div class="paso-contenido">
+          <p class="paso-titulo">¿Par encontrado?</p>
+          <p class="paso-desc">Si las dos cartas muestran el mismo dibujo, ¡hiciste pareja! Guarda ese par y vuelve a jugar de inmediato un turno extra.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="paso-num">4</span>
+        <div class="paso-contenido">
+          <p class="paso-titulo">No coinciden — voltéalas</p>
+          <p class="paso-desc">Si las cartas son distintas, vólvelas boca abajo en el mismo lugar. ¡Memoriza bien sus posiciones! Pasa el turno al siguiente jugador.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="paso-num">5</span>
+        <div class="paso-contenido">
+          <p class="paso-titulo">¡Fin del juego!</p>
+          <p class="paso-desc">Cuando todas las parejas han sido descubiertas, cada jugador cuenta sus pares. El que más tenga, ¡gana la partida!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divisor">
+    <div class="divisor-line"></div>
+    <span class="divisor-sym">♪</span>
+    <span class="divisor-sym">🥁</span>
+    <span class="divisor-sym">♫</span>
+    <div class="divisor-line"></div>
+  </div>
+
+  <!-- ══ 04 IMÁGENES DEL JUEGO ══ -->
+  <div class="seccion">
+    <div class="sec-header">
+      <span class="sec-num">04</span>
+      <h2 class="sec-titulo">Imágenes del Juego</h2>
+    </div>
+    <div class="tarjeta" style="margin-bottom:16px;">
+      <ul class="regla-lista">
+        <li class="regla-item">
+          <span class="regla-icono">🎨</span>
+          <span class="regla-text">Cada imagen representa un <strong>elemento auténtico del folclor vallenato</strong></span>
+        </li>
+      </ul>
+    </div>        
+  </div>
+
+  <!-- ══ 06 REGLAS ESPECIALES ══ -->
+  <div class="seccion">
+    <div class="sec-header">
+      <span class="sec-num">05</span>
+      <h2 class="sec-titulo">Reglas Especiales</h2>
+    </div>
+    <div class="penalizacion-list">
+      <div class="pen-item">
+        <span class="pen-icon">👀</span>
+        <p class="pen-text"><strong>Mirar está prohibido:</strong> No puedes volver a mirar una carta boca abajo después de que el turno pasó. ¡Solo la memoria vale!</p>
+      </div>
+      <div class="pen-item">
+        <span class="pen-icon">⏱️</span>
+        <p class="pen-text"><strong>Turno rápido:</strong> Si hay jugadores pequeños, pueden poner un límite de <strong>15 segundos</strong> por turno para hacerlo más emocionante.</p>
+      </div>
+      <div class="pen-item">
+        <span class="pen-icon">🙅</span>
+        <p class="pen-text"><strong>Sin ayudas:</strong> No se puede señalar, soplar ni dar pistas a otro jugador. ¡Cada quien defiende sus propios pares!</p>
+      </div>
+      <div class="pen-item">
+        <span class="pen-icon">🔄</span>
+        <p class="pen-text"><strong>Voltear obligatorio:</strong> Una vez tocas una carta, <strong>debes voltearla</strong>. No puedes cambiar de decisión a mitad de turno.</p>
+      </div>
+      <div class="pen-item">
+        <span class="pen-icon">🎉</span>
+        <p class="pen-text"><strong>Turno extra dorado:</strong> Si encuentras un par, juegas de nuevo. Puedes encadenar varios pares seguidos si tu memoria es buena.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ NOTA CULTURAL ══ -->
+  <div class="seccion">
+    <div class="nota-cultural">
+      <span class="nota-icono">🪗</span>
+      <div class="nota-body">
+        <span class="nota-label">🌟 Sabías que...</span>
+        <p class="nota-txt">El Festival de la Leyenda Vallenata se celebra cada año en Valledupar, Cesar, desde 1968. En 2015, la UNESCO declaró la música vallenata tradicional como Patrimonio Cultural Inmaterial de la Humanidad.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divisor">
+    <div class="divisor-line"></div>
+    <span class="divisor-sym">♩</span>
+    <span class="divisor-sym">🪗</span>
+    <span class="divisor-sym">♬</span>
+    <div class="divisor-line"></div>
+  </div>
+
+  <footer>
+    <span class="footer-notas">♩ ♪ ♫ ♬ ♩</span>
+    <span class="footer-logo">Memory Cards Vallenato</span>
+    <p class="footer-copy">Edición especial — Festival de la Leyenda Vallenata · Versión 1.0</p>
+  </footer>
+
+</div>
+</body>
+</html>
